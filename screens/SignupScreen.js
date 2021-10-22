@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   Button,
   Image,
@@ -11,11 +11,15 @@ import {
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import SocialButton from '../components/SocialButton';
+import {AuthContext} from '../navigation/AuthProvider';
 
 const SignupScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassrord, setConfirmPassword] = useState();
+
+  const {register} = useContext(AuthContext);
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -26,6 +30,7 @@ const SignupScreen = ({navigation}) => {
           />
           <Text style={styles.titleText}>SocialMoslem</Text>
         </View>
+
         <FormInput
           labelValue={email}
           placeholderText="Email"
@@ -35,6 +40,7 @@ const SignupScreen = ({navigation}) => {
           autoCorrect={false}
           onChangeText={(userEmail) => setEmail(userEmail)}
         />
+
         <FormInput
           labelValue={password}
           placeholderText="Password"
@@ -42,6 +48,7 @@ const SignupScreen = ({navigation}) => {
           secureTextEntry={true}
           onChangeText={(userPassword) => setPassword(userPassword)}
         />
+
         <FormInput
           labelValue={confirmPassrord}
           placeholderText="Confirm Password"
@@ -49,7 +56,12 @@ const SignupScreen = ({navigation}) => {
           secureTextEntry={true}
           onChangeText={(userPassword) => setConfirmPassword(userPassword)}
         />
-        <FormButton buttonTitle="Sign Up" onPress={() => {}} />
+
+        <FormButton
+          buttonTitle="Sign Up"
+          onPress={() => register(email, password)}
+        />
+
         <View style={{marginTop: -10, flexDirection: 'row'}}>
           <Text style={styles.textPrivate}>
             By registering, you confirm that you accept our{' '}
@@ -68,6 +80,7 @@ const SignupScreen = ({navigation}) => {
             </Text>
           </TouchableOpacity>
         </View>
+
         <SocialButton
           backgroundColor="#b3e5fc"
           iconType="facebook"
@@ -75,6 +88,7 @@ const SignupScreen = ({navigation}) => {
           buttonTitle="Facebook"
           onPress={() => {}}
         />
+
         <SocialButton
           backgroundColor="#ffccbc"
           iconType="google"
@@ -82,6 +96,7 @@ const SignupScreen = ({navigation}) => {
           buttonTitle="Google"
           onPress={() => {}}
         />
+
         <View style={styles.navTextContainer}>
           <Text style={styles.navText}>Have account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Signin')}>

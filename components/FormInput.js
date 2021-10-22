@@ -11,6 +11,7 @@ const FormInput = ({labelValue, placeholderText, iconType, ...rest}) => {
       </View>
       <TextInput
         style={styles.input}
+        style={styles.input}
         value={labelValue}
         placeholder={placeholderText}
         {...rest}
@@ -36,5 +37,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: 40,
+  },
+  input: {
+    padding: 10,
+    flex: 1,
+    fontSize: 16,
+    // fontFamily: '',
+    color: '#333',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

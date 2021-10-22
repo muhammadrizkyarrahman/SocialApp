@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   Button,
   Image,
@@ -10,10 +10,14 @@ import {
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import SocialButton from '../components/SocialButton';
+import {AuthContext} from '../navigation/AuthProvider';
 
 const SigninScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  const {login} = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
       <View style={styles.headerWrapper}>
@@ -23,6 +27,7 @@ const SigninScreen = ({navigation}) => {
         />
         <Text style={styles.titleText}>SocialMoslem</Text>
       </View>
+
       <FormInput
         labelValue={email}
         placeholderText="Email"
@@ -32,6 +37,7 @@ const SigninScreen = ({navigation}) => {
         autoCorrect={false}
         onChangeText={(userEmail) => setEmail(userEmail)}
       />
+
       <FormInput
         labelValue={password}
         placeholderText="Password"
@@ -39,10 +45,16 @@ const SigninScreen = ({navigation}) => {
         secureTextEntry={true}
         onChangeText={(userPassword) => setPassword(userPassword)}
       />
-      <FormButton buttonTitle="Sign in" onPress={() => {}} />
+
+      <FormButton
+        buttonTitle="Sign in"
+        onPress={() => login(email, password)}
+      />
+
       <TouchableOpacity onPress={() => {}}>
         <Text style={styles.navText}>Forgot Password?</Text>
       </TouchableOpacity>
+
       <SocialButton
         backgroundColor="#b3e5fc"
         iconType="facebook"
@@ -50,6 +62,7 @@ const SigninScreen = ({navigation}) => {
         buttonTitle="Facebook"
         onPress={() => {}}
       />
+
       <SocialButton
         backgroundColor="#ffccbc"
         iconType="google"
@@ -57,6 +70,7 @@ const SigninScreen = ({navigation}) => {
         buttonTitle="Google"
         onPress={() => {}}
       />
+
       <View style={styles.navTextContainer}>
         <Text style={styles.navText}>Don't have account?</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
